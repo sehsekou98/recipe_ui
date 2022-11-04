@@ -1,0 +1,21 @@
+.recipe__card{
+    width: 10rem;
+    height: fit-content;
+    /* background-color: aliceblue; */
+    margin: 1rem;
+    text-align: center;
+    color: #074432;
+    font-size: .7rem;
+}
+
+.recipe__card:hover{
+    cursor: pointer;
+    opacity: .7;
+}
+
+.recipe__card img{
+    width: 100%;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 5%;
+}

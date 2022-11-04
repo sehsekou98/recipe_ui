@@ -13,3 +13,11 @@
 .right-side{
     flex: 1;
 }
+
+.recipe__list{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}

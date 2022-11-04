@@ -66,9 +66,14 @@ const Fliter = () => {
           />
         </FormGroup>
 
+        <div className="filterAction">
+        {/* <Button variant="contained" sx={{backgroundColor: "gray"}} onClick={handleFilter}>
+          Clear
+        </Button> */}
         <Button variant="contained" color="success" onClick={handleFilter}>
           Filter
         </Button>
+        </div>
       </div>
     </div>
   );
