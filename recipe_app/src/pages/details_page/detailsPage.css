@@ -1,0 +1,49 @@
+.detailsPage{
+}
+
+.detailsPage p{
+    font-family: "Istok Web", sans-serif;
+    color: #7A7777;
+    margin-bottom: .5rem;
+    text-align: justify;
+}
+
+.detailsPage h2{
+    color: #68BBA2;
+    font-family: "Inder", sans-serif;
+    font-weight: normal;
+    margin-bottom: .5rem;
+}
+
+
+.detailsPage img{
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+}
+
+.detailsPage__content{
+    padding: 1rem 10rem;
+}
+
+.detailsPage__content--header{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.detailsPage__content--header.p{
+    font-family: "Inter", sans-serif;
+    color: #000000;
+}
+
+.detailsPage__content--header span{
+    font-weight: bolder;
+}
+
+.detailsPage__action{
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+}
+

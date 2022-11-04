@@ -1,6 +1,9 @@
 
 import "@fontsource/indie-flower"
 import "@fontsource/inika"
+import "@fontsource/inder"
+import "@fontsource/istok-web"
+import "@fontsource/inter"
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

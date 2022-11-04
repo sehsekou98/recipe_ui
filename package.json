@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@fontsource/inder": "^4.5.11",
     "@fontsource/indie-flower": "^4.5.10",
-    "@fontsource/inika": "^4.5.11"
+    "@fontsource/inika": "^4.5.11",
+    "@fontsource/inter": "^4.5.14",
+    "@fontsource/istok-web": "^4.5.11"
   }
 }
