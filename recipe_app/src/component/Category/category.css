@@ -1,0 +1,24 @@
+.category{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    width: 20rem;
+    height: fit-content;
+    
+}
+
+.category:hover{
+    cursor: pointer;
+    opacity: .7;
+}
+
+.category img{
+    height: 20rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.category h2{
+    text-align: center;
+    margin: 1rem;
+}

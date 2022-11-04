@@ -1,0 +1,15 @@
+.landing_page_section-catetory{
+    display: flex;
+    justify-content: center;
+}
+.landing_page_section-title{
+    width: 70%;
+    margin: 3rem auto;
+}
+.landing_page_section-title{
+    text-align: center;
+    font-size: 3rem;
+    font-family: "Indie Flower", cursive;
+    color: #044D37;
+
+}

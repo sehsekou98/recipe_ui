@@ -1,0 +1,19 @@
+.header h1{
+    color: #044D37;
+    letter-spacing: .1rem;
+    /* text-transform: uppercase; */
+    font-family: "Indie Flower", cursive;
+}
+.header h1:hover{
+    cursor: pointer;
+    opacity: .7;
+}
+.header{
+    height: 70px;
+    width: inherit;
+    background-color: #E7FBF5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}

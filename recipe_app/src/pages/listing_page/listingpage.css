@@ -1,0 +1,15 @@
+.listing-section{
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.left-side{
+    width: 20%;
+    border-right: 2.5px solid #68BBA2;
+    margin-right: 1rem;
+}
+
+.right-side{
+    flex: 1;
+}
