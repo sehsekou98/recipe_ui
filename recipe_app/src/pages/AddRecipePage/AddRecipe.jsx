@@ -3,13 +3,23 @@ import React from "react";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Box, Button, IconButton, TextField } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 const style = {
   textfieldStyles: {
     marginBottom: ".5rem",
+    "&:focus": {
+      borderColor: "green",
+    },
   },
   previewImageStyle: {
     width: "10rem",
@@ -29,8 +39,8 @@ const AddRecipe = () => {
     description: "",
     imageUrl: "",
     instruction: "",
-    recipeOrigin: "",
-    recipeType: "",
+    recipeOrigin: "AFRICAN",
+    recipeType: "VEGETARIAN",
   });
 
   const [ingredient, setIngredient] = useState({
@@ -89,8 +99,8 @@ const AddRecipe = () => {
       description: "",
       imageUrl: "",
       instruction: "",
-      recipeOrigin: "",
-      recipeType: "",
+      recipeOrigin: "AFRICAN",
+      recipeType: "VEGETARIAN",
     });
   };
 
@@ -115,13 +125,18 @@ const AddRecipe = () => {
       return;
     }
 
+    if (newRecipe.instruction === "") {
+      alert("Recipe Instruction missing.");
+      return;
+    }
+
     if (newRecipe.description === "") {
-      alert("Recipe Name missing.");
+      alert("Recipe Description missing.");
       return;
     }
 
     if (newRecipe.imageUrl === "") {
-      alert("Recipe Name missing.");
+      alert("Recipe Image Url Missing.");
       return;
     }
 
@@ -148,7 +163,23 @@ const AddRecipe = () => {
           sx={{ ...style.textfieldStyles }}
         />
 
+        <TextField
+          name="description"
+          value={newRecipe.description}
+          onChange={handleNewRecipeOnChange}
+          label="Recipe Description"
+          variant="outlined"
+          fullWidth
+          sx={{ ...style.textfieldStyles }}
+        />
+
         <div>
+          <h2
+            style={{ color: "#68BBA2", fontSize: "1rem", fontWeight: "normal" }}
+          >
+            {" "}
+            Ingredients:{" "}
+          </h2>
           <TextField
             name="name"
             value={ingredient.name}
@@ -217,6 +248,46 @@ const AddRecipe = () => {
             }
             alt="recipe-image-preview"
           />
+        </div>
+        <div>
+          <br />
+          <TextField
+            name="instruction"
+            value={newRecipe.instruction}
+            onChange={handleNewRecipeOnChange}
+            label="Instruction"
+            variant="outlined"
+            fullWidth
+            sx={{ ...style.textfieldStyles }}
+          />
+          <InputLabel id="demo-simple-select-label">Recipe Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            name="recipeType"
+            value={newRecipe.recipeType}
+            label="Recipe Origin"
+            onChange={handleNewRecipeOnChange}
+            sx={{ width: "70%" }}
+          >
+            <MenuItem value="VEGETARIAN">Vegetarian</MenuItem>
+            <MenuItem value="NON_VEGETARIAN">Non-Vegetarian</MenuItem>
+          </Select>
+
+          <br />
+
+          <InputLabel id="demo-simple-select-label">Recipe Origin</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            name="recipeOrigin"
+            value={newRecipe.recipeOrigin}
+            label="Recipe Origin"
+            onChange={handleNewRecipeOnChange}
+            sx={{ width: "70%" }}
+          >
+            <MenuItem value="AFRICAN">African</MenuItem>
+            <MenuItem value="EUROPEAN">European</MenuItem>
+            <MenuItem value="ASIAN">Asian</MenuItem>
+          </Select>
         </div>
         <div style={style.actionStyles}>
           <Button

@@ -1,9 +1,19 @@
-import './listingpage.css'
+import "./listingpage.css";
 import React from "react";
-import Fliter from '../../component/Fliter';
-import RecipeCard from '../../component/RecipeCard/RecipeCard';
+import Fliter from "../../component/Fliter";
+import RecipeCard from "../../component/RecipeCard/RecipeCard";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const ListingPage = () => {
+  const getRecipes = async () => {
+    const response = await axios.get("/recipe/getAll");
+    return response.data;
+  };
+  //query
+  const { data, isLoading, isError } = useQuery("recipes", getRecipes, {
+    refetchOnWindowFocus: false,
+  });
   return (
     <div>
       <div
@@ -40,9 +50,25 @@ const ListingPage = () => {
 
         <div className="right-side">
           <div className="recipe__list">
-            <RecipeCard name="Palm Butter" id="1" imgSrc="https://images.unsplash.com/photo-1521909944782-4aee70b674ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
-            <RecipeCard name="Egusi"  id="2" imgSrc="https://images.unsplash.com/photo-1510629954389-c1e0da47d414?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"/>
-            <RecipeCard name="Eba"  id="3" imgSrc="https://images.unsplash.com/photo-1515683359900-6922e4964be1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
+            {data.map((r, i) => (
+              <RecipeCard key={r.id} name={r.name} />
+            ))}
+
+            <RecipeCard
+              name="Palm Butter"
+              id="1"
+              imgSrc="https://images.unsplash.com/photo-1521909944782-4aee70b674ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            />
+            <RecipeCard
+              name="Egusi"
+              id="2"
+              imgSrc="https://images.unsplash.com/photo-1510629954389-c1e0da47d414?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+            />
+            <RecipeCard
+              name="Eba"
+              id="3"
+              imgSrc="https://images.unsplash.com/photo-1515683359900-6922e4964be1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            />
           </div>
         </div>
       </section>
