@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
-import { useNavigate } from "react-router-dom";
 
 const style = {
   textfieldStyles: {
@@ -34,7 +33,6 @@ const style = {
   },
 };
 const AddRecipe = () => {
-  const navigate = useNavigate();
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     ingredients: [],
@@ -117,7 +115,6 @@ const AddRecipe = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["recipes"]);
       handleReset();
-      navigate(`/listing/${data.recipeType.toUpperCase()}`);
       // console.log(data)
     },
   });

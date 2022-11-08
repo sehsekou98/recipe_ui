@@ -1,0 +1,21 @@
+.addRecipe{
+
+}
+.addRecipeTitle{
+	color: #68BBA2;
+	font-size: 2rem;
+	text-align: center;
+	font-weight: normal;
+	font-family: "Inder", sans-serif;
+	padding: 2rem 10rem;
+}
+
+.addRecipe-form{
+	width: fit-content;
+	height:fit-content;
+	margin: 1rem auto;
+	border: 2px solid #68BBA2;
+	border-radius: 10%;
+	padding: 2rem 5rem;
+	margin-bottom: 5rem;
+}
