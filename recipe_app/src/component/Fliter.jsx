@@ -9,21 +9,37 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const Fliter = ({ type }) => {
+  const [all, setAll] = useState(true);
   const [filter, setFilter] = useState({
-    african: false,
-    asian: false,
-    northAmerican: false,
-    southAmerican: false,
-    european: false,
-    antartica: false,
-    australian: false,
+    african: !all,
+    asian: !all,
+    northAmerican: !all,
+    southAmerican: !all,
+    european: !all,
+    antartica: !all,
+    australian: !all,
   });
 
   const handleOnChange = (e) => {
-    setFilter({
-      ...filter,
-      [e.target.name]: e.target.checked,
-    });
+    if (e.target.name === "all") {
+      setAll(e.target.checked);
+      setFilter({
+        african: !all,
+        asian: !all,
+        northAmerican: !all,
+        southAmerican: !all,
+        european: !all,
+        antartica: !all,
+        australian: !all,
+      });
+    } else {
+      setAll(false);
+
+      setFilter({
+        ...filter,
+        [e.target.name]: e.target.checked,
+      });
+    }
   };
 
   //retrive recipe
@@ -54,9 +70,20 @@ const Fliter = ({ type }) => {
 
   return (
     <div className="fliter">
-      <h3>Fliter By:</h3>
+      <h3>Fliter Recipes By Origin:</h3>
       <div className="filter_checkbox">
         <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                color="success"
+                name="all"
+                checked={all}
+                onChange={handleOnChange}
+              />
+            }
+            label="All "
+          />
           <FormControlLabel
             control={
               <Checkbox
