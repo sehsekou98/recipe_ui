@@ -5,31 +5,52 @@ import Button from "@mui/material/Button";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-const Fliter = () => {
-    const [filter, setFilter] = useState({
-        african: false,
-        asian: false,
-        northAmerican: false,
-        southAmerican: false,
-        european: false,
-        antartica: false,
-        australian: false
-    })
+const Fliter = ({ type }) => {
+  const [filter, setFilter] = useState({
+    african: false,
+    asian: false,
+    northAmerican: false,
+    southAmerican: false,
+    european: false,
+    antartica: false,
+    australian: false,
+  });
 
-    const handleOnChange = e=>{
-        setFilter(
-            {
-                ...filter,
-                [e.target.name]: e.target.checked
-            }
-        )
-    }
+  const handleOnChange = (e) => {
+    setFilter({
+      ...filter,
+      [e.target.name]: e.target.checked,
+    });
+  };
 
-    const handleFilter = ()=>{
-        
-        console.log(filter)
-    }
+  //retrive recipe
+  const getRecipes = async () => {
+    const response = await axios.get(
+      `/recipe/getAll?recipeType=${type.toUpperCase()}&african=${
+        filter.african
+      }&asian=${filter.asian}&european=${filter.european}&northAmerican=${
+        filter.northAmerican
+      }&southAmerican=${filter.southAmerican}&australian=${
+        filter.australian
+      }&antartica=${filter.antartica}`
+    );
+    return response.data;
+  };
+
+  const { refetch } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: getRecipes,
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
+
+  const handleFilter = () => {
+    refetch();
+    console.log(filter);
+  };
 
   return (
     <div className="fliter">
@@ -37,42 +58,91 @@ const Fliter = () => {
       <div className="filter_checkbox">
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox color="success" name="african" checked={filter.african} onChange={handleOnChange} />}
+            control={
+              <Checkbox
+                color="success"
+                name="african"
+                checked={filter.african}
+                onChange={handleOnChange}
+              />
+            }
             label="African"
           />
           <FormControlLabel
-            control={<Checkbox color="success" name="asian" checked={filter.asian} onChange={handleOnChange} />}
+            control={
+              <Checkbox
+                color="success"
+                name="asian"
+                checked={filter.asian}
+                onChange={handleOnChange}
+              />
+            }
             label="Asian"
           />
           <FormControlLabel
-            control={<Checkbox color="success" name="northAmerican" checked={filter.northAmerican} onChange={handleOnChange} />}
+            control={
+              <Checkbox
+                color="success"
+                name="northAmerican"
+                checked={filter.northAmerican}
+                onChange={handleOnChange}
+              />
+            }
             label="North America"
           />
           <FormControlLabel
-            control={<Checkbox color="success" name="southAmerican" checked={filter.southAmerican} onChange={handleOnChange}  />}
+            control={
+              <Checkbox
+                color="success"
+                name="southAmerican"
+                checked={filter.southAmerican}
+                onChange={handleOnChange}
+              />
+            }
             label="South America"
           />
           <FormControlLabel
-            control={<Checkbox color="success"  name="european" checked={filter.european} onChange={handleOnChange} />}
+            control={
+              <Checkbox
+                color="success"
+                name="european"
+                checked={filter.european}
+                onChange={handleOnChange}
+              />
+            }
             label="European"
           />
           <FormControlLabel
-            control={<Checkbox color="success"  name="antartica" checked={filter.antartica} onChange={handleOnChange}  />}
+            control={
+              <Checkbox
+                color="success"
+                name="antartica"
+                checked={filter.antartica}
+                onChange={handleOnChange}
+              />
+            }
             label="Antartica"
           />
           <FormControlLabel
-            control={<Checkbox color="success"  name="australian" checked={filter.australian} onChange={handleOnChange} />}
+            control={
+              <Checkbox
+                color="success"
+                name="australian"
+                checked={filter.australian}
+                onChange={handleOnChange}
+              />
+            }
             label="Australian"
           />
         </FormGroup>
 
         <div className="filterAction">
-        {/* <Button variant="contained" sx={{backgroundColor: "gray"}} onClick={handleFilter}>
+          {/* <Button variant="contained" sx={{backgroundColor: "gray"}} onClick={handleFilter}>
           Clear
         </Button> */}
-        <Button variant="contained" color="success" onClick={handleFilter}>
-          Filter
-        </Button>
+          <Button variant="contained" color="success" onClick={handleFilter}>
+            Filter
+          </Button>
         </div>
       </div>
     </div>

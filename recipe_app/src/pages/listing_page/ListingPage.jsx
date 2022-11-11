@@ -64,7 +64,7 @@ const ListingPage = () => {
 
       <section className="listing-section">
         <aside className="left-side">
-          <Fliter />
+          <Fliter type={type} />
         </aside>
 
         <div className="right-side">

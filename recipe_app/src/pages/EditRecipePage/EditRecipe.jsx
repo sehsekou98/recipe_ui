@@ -32,7 +32,7 @@ const style = {
     marginTop: "1rem",
   },
 };
-const AddRecipe = () => {
+const EditRecipe = () => {
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     ingredients: [],
@@ -328,4 +328,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default EditRecipe;
