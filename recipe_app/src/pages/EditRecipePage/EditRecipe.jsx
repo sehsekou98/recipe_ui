@@ -1,18 +1,20 @@
-import "./addRecipe.css";
+import "./editRecipe.css";
 import React from "react";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import {
   Button,
   IconButton,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
+import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
   textfieldStyles: {
@@ -33,6 +35,11 @@ const style = {
   },
 };
 const EditRecipe = () => {
+  const { id } = useParams();
+  const [recipe, setRecipe] = useState(null);
+
+  const navigate = useNavigate();
+
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     ingredients: [],
@@ -88,30 +95,17 @@ const EditRecipe = () => {
   };
 
   const handleReset = () => {
-    setIngredient({
-      name: "",
-      quantity: "",
-    });
-
-    setNewRecipe({
-      name: "",
-      ingredients: [],
-      description: "",
-      imageUrl: "",
-      instruction: "",
-      recipeOrigin: "AFRICAN",
-      recipeType: "VEGETARIAN",
-    });
+    navigate(-1);
   };
 
   const queryClient = useQueryClient();
 
-  const postRecipe = async (dto) => {
-    const { data } = await axios.post("/recipe/create", dto);
+  const editRecipe = async (dto) => {
+    const { data } = await axios.put("recipe/update", dto);
     return data;
   };
 
-  const { mutate, isLoading, isError } = useMutation(postRecipe, {
+  const { mutate } = useMutation(editRecipe, {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["recipes"]);
       handleReset();
@@ -119,7 +113,7 @@ const EditRecipe = () => {
     },
   });
 
-  const handleAddRecipe = () => {
+  const handleEditRecipe = () => {
     if (newRecipe.name === "") {
       alert("Recipe Name missing.");
       return;
@@ -146,10 +140,34 @@ const EditRecipe = () => {
     }
     mutate(newRecipe);
   };
+
+  //retrive recipe
+
+  const getSingleRecipe = async () => {
+    const response = await axios.get(`/recipe/getRecipe/${id}`);
+    return response.data;
+  };
+
+  const { isLoading } = useQuery({
+    queryKey: ["recipes-single"],
+    queryFn: getSingleRecipe,
+    refetchOnWindowFocus: false,
+    onSuccess: (data) => {
+      setNewRecipe(data);
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
+  }
   return (
     <div classname="addRecipe">
       <div className="addRecipeTitle">
-        <h2>Please Complete the form below to add a new Recipe </h2>
+        <h2>Edit Your Recipe </h2>
       </div>
 
       <div className="addRecipe-form">
@@ -303,7 +321,7 @@ const EditRecipe = () => {
             }}
           >
             {" "}
-            Reset Form
+            Cancel
           </Button>
 
           <Button
@@ -316,11 +334,11 @@ const EditRecipe = () => {
                 color: " #FAF7F0",
               },
             }}
-            onClick={handleAddRecipe}
+            onClick={handleEditRecipe}
             disabled={isLoading}
           >
             {" "}
-            Add
+            Edit
           </Button>
         </div>
       </div>

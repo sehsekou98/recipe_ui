@@ -9,6 +9,7 @@ import DetailsPage from './pages/details_page/DetailsPage'
 import FooterSection from './component/FooterSection'
 import AddRecipe from './pages/AddRecipePage/AddRecipe'
 import axios from 'axios'
+import EditRecipe from './pages/EditRecipePage/EditRecipe'
 
 axios.defaults.baseURL = 'http://localhost:8181/api'
 // axios.defaults.baseURL = 'https://desolate-retreat-02694.herokuapp.com/api'
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="listing/:type" element={<ListingPage />} />
           <Route path="/details/:id" element={<DetailsPage />} />
+          <Route path="/edit-recipe/:id" element={<EditRecipe />} />
           <Route path="/add-recipe" element={<AddRecipe />} />
         </Routes>
       </div>

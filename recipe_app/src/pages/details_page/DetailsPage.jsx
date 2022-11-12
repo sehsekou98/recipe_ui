@@ -49,6 +49,10 @@ const DetailsPage = () => {
     mutate();
   };
 
+  const goToEditPage = () => {
+    navigate(`/edit-recipe/${id}`);
+  };
+
   //retrive recipe
 
   const getSingleRecipe = async () => {
@@ -140,7 +144,12 @@ const DetailsPage = () => {
           >
             Delete
           </Button>
-          <Button sx={{ margin: ".5rem" }} variant="contained" color="success">
+          <Button
+            onClick={goToEditPage}
+            sx={{ margin: ".5rem" }}
+            variant="contained"
+            color="success"
+          >
             Edit
           </Button>
         </div>
